@@ -1,8 +1,8 @@
-# 🚑 Ações Imediatas de Mitigação
+# Ações Imediatas de Mitigação
 
 ---
 
-## 📈 Escalonamento
+##  Escalonamento
 
 Aumentar as réplicas da `payment-api` temporariamente:
 
@@ -16,7 +16,7 @@ bash
 Copiar
 Editar
 kubectl top pod -n payment
-🔁 Reinício dos Pods
+ Reinício dos Pods
 Forçar nova tentativa de conexão:
 
 bash
@@ -27,21 +27,21 @@ kubectl rollout restart deploy payment-api -n payment
 
 ---
 
-### ✅ `postmortem.md`
+###  `postmortem.md`
 
 ```md
-# 📝 Post-Mortem: Latência na payment-api
+#  Post-Mortem: Latência na payment-api
 
 ---
 
-## 📅 Contexto
+##  Contexto
 
 No dia **13/07/2025**, às 08h03, um alerta de **latência > 2s** foi emitido para o serviço `payment-api`.  
 Esse serviço é responsável pelo processamento de pagamentos em tempo real.
 
 ---
 
-## 🕒 Linha do Tempo
+##  Linha do Tempo
 
 | Horário | Evento |
 |--------|--------|
@@ -56,28 +56,28 @@ Esse serviço é responsável pelo processamento de pagamentos em tempo real.
 
 ---
 
-## 🧨 Causa Raiz
+##  Causa Raiz
 
 - Esgotamento do **pool de conexões** com o banco de dados RDS.
 - Aumento súbito de requisições simultâneas, além da capacidade atual.
 
 ---
 
-## 🔥 Impacto
+##  Impacto
 
 - Falhas e lentidão no processamento de pagamentos por aproximadamente 30 minutos.
 - Parte das transações foi perdida por timeout.
 
 ---
 
-## 📚 Lições Aprendidas
+##  Lições Aprendidas
 
 - Falta de visibilidade detalhada nas conexões com banco.
 - Ausência de alerta para saturação de conexões.
 
 ---
 
-## ✅ Ações Preventivas
+##  Ações Preventivas
 
 - Adição de alertas no Datadog para uso de pool.
 - Criação de SLOs para tempo de resposta e conectividade com RDS.
