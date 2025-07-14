@@ -3,7 +3,7 @@
 Este diretório contém toda a documentação do incidente de latência na API de pagamentos, conforme o Desafio 2 do case técnico SRE.
 
 📌 **Resumo do incidente**:
-- Data: [coloque uma data fictícia ou real]
+- Data: [coloque uma data fictícia]
 - Ambiente: Produção
 - Cluster: `EKS-prod`
 - Serviço impactado: `payment-api`
