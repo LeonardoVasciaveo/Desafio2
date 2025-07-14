@@ -1,8 +1,8 @@
-# 📝 Post-Mortem: Incidente de Latência na payment-api
+# Post-Mortem: Incidente de Latência na payment-api
 
 ---
 
-## 📅 Contexto
+## Contexto
 
 Em **13/07/2025 às 08:03**, um alerta foi disparado no **Datadog** indicando que a **latência média da `payment-api`** estava acima de 2 segundos por mais de 10 minutos.
 
@@ -10,7 +10,7 @@ Esse serviço é crítico para o processamento de pagamentos no e-commerce da em
 
 ---
 
-## 🕒 Linha do Tempo
+## Linha do Tempo
 
 | Horário | Evento |
 |--------|--------|
@@ -25,22 +25,22 @@ Esse serviço é crítico para o processamento de pagamentos no e-commerce da em
 
 ---
 
-## 🧨 Causa Raiz
+## Causa Raiz
 
 - O **pool de conexões com o RDS foi esgotado**, gerando timeouts na aplicação.
 - O aumento inesperado de requisições simultâneas não foi absorvido pelo número atual de réplicas.
 
 ---
 
-## 📉 Impacto
+## Impacto
 
-- Serviço de pagamentos com falhas e lentidão durante **~30 minutos**.
+- Serviço de pagamentos com falhas e lentidão durante aproximadamente **30 minutos**.
 - Parte das transações foi **cancelada automaticamente por timeout**.
 - Perda de receita estimada não foi mensurada no momento do post-mortem.
 
 ---
 
-## 📚 Lições Aprendidas
+## Lições Aprendidas
 
 - Conexões com banco de dados são um **gargalo crítico** e devem ser monitoradas com mais granularidade.
 - Alertas proativos para **uso de conexões e saturação de pool** estavam ausentes.
@@ -48,7 +48,7 @@ Esse serviço é crítico para o processamento de pagamentos no e-commerce da em
 
 ---
 
-## 🛠️ Ações Preventivas
+## Ações Preventivas
 
 - [x] Criar alertas específicos para **erros de conexão** com o RDS.
 - [x] Monitorar `DatabaseConnections` e `DatabaseConnectionsLimit` via CloudWatch e Datadog.
@@ -59,7 +59,7 @@ Esse serviço é crítico para o processamento de pagamentos no e-commerce da em
 
 ---
 
-## ✅ Conclusão
+## Conclusão
 
 O incidente foi **rapidamente mitigado** com o aumento das réplicas e reinício do serviço.  
 Foram identificados **pontos cegos na observabilidade** e no controle de conexões com o banco, que já estão sendo tratados com ações estruturais.
