@@ -1,12 +1,12 @@
 # Diagnóstico - Incidente Latência API Payment
 
-## 🧪 Sintomas observados
+##  Sintomas observados
 
 - Alerta no Datadog: Latência média > 2s por 10min
 - Logs: Timeout ao acessar banco RDS
 - ArgoCD: Aplicação `Healthy` e `Synced`
 
-## 🔍 Ferramentas utilizadas
+##  Ferramentas utilizadas
 
 - Datadog
 - ArgoCD
@@ -14,7 +14,7 @@
 - AWS CloudWatch
 - RDS Console
 
-## 🧾 Comandos executados
+##  Comandos executados
 
 ```bash
 kubectl get pods -n payment
